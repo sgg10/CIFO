@@ -10,4 +10,5 @@ urlpatterns = [
   path(settings.ADMIN_URL, admin.site.urls),
 
   path('', include(('cifo.users.urls', 'users'), namespace='users')),
+  path('', include(('cifo.documents.urls', 'documents'), namespace='documents')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

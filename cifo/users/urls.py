@@ -15,9 +15,15 @@ from rest_framework_simplejwt.views import (
 # Views
 from cifo.users.views import UserLoginAPIView
 from .views import users as user_views
+from .views import documents as documents_views
 
 router = DefaultRouter()
 router.register(r'users', user_views.UserViewSet, basename='users')
+router.register(
+  r'users/(?P<identification>[-0-9_-]+)/documents',
+  documents_views.UserDocumentsViewSet,
+  basename='user_documents'
+)
 
 urlpatterns = [
   path('users/login/', UserLoginAPIView.as_view(), name='login'),

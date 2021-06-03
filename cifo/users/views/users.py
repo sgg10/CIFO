@@ -66,17 +66,3 @@ class UserViewSet(mixins.RetrieveModelMixin,
     serializer.save()
     data = { 'message': 'Congratulation, now go to upload some files!' }
     return Response(data, status=status.HTTP_200_OK)
-
-  # def retrieve(self, request, *args, **kwargs):
-  #   """Add extra data to the response."""
-  #   response = super(UserViewSet, self).retrieve(request, *args, **kwargs)
-  #   circles = Circle.objects.filter(
-  #     members=request.user,
-  #     membership__is_active=True
-  #   )
-  #   data = {
-  #     'user': response.data,
-  #     'circles': CircleModelSerializer(circles, many=True).data
-  #   }
-  #   response.data = data
-  #   return response

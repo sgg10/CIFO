@@ -2,6 +2,7 @@
 
 import environ
 from datetime import timedelta
+import pyrebase
 
 ROOT_DIR = environ.Path(__file__) - 3
 APPS_DIR = ROOT_DIR.path('cifo')
@@ -51,6 +52,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
   'cifo.users.apps.UsersAppConfig',
+  'cifo.documents.apps.DocumentsAppConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -175,3 +177,17 @@ SIMPLE_JWT = {
   'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
   'ROTATE_REFRESH_TOKENS': True
 }
+
+# Firebase
+firebaseConfig = {
+  "apiKey": "AIzaSyDTHhGThVzVPk0OMCPrAnTVhrqltZD4b2s",
+  "authDomain": "cifo-4fc32.firebaseapp.com",
+  "databaseURL": "https://cifo-4fc32-default-rtdb.firebaseio.com",
+  "projectId": "cifo-4fc32",
+  "storageBucket": "cifo-4fc32.appspot.com",
+  "messagingSenderId": "573879762726",
+  "appId": "1:573879762726:web:6f22566f422691fd45cbe7",
+  "measurementId": "G-32N3D39CS0"
+};
+
+firebase = pyrebase.initialize_app(firebaseConfig)
