@@ -27,6 +27,6 @@ router.register(
 
 urlpatterns = [
   path('users/login/', UserLoginAPIView.as_view(), name='login'),
-  path('users/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+  path('users/refresh/',  user_views.UserTokenRefreshView.as_view(), name='token_refresh'),
   path('', include(router.urls)),
 ]
