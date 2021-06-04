@@ -88,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # Static files
@@ -191,3 +192,6 @@ firebaseConfig = {
 };
 
 firebase = pyrebase.initialize_app(firebaseConfig)
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True

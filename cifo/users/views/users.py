@@ -4,7 +4,7 @@
 from rest_framework import status, viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # Permissions
 from rest_framework.permissions import (
@@ -18,7 +18,8 @@ from cifo.users.serializers.users import (
   UserLoginSerializer,
   UserModelSerializer,
   UserSignUpSerializer,
-  AccountVerificationSerializer
+  AccountVerificationSerializer,
+  UserTokenRefreshSerializer
 )
 
 # Models
@@ -27,6 +28,10 @@ from cifo.users.models import User
 class UserLoginAPIView(TokenObtainPairView):
   """User login API view."""
   serializer_class = UserLoginSerializer
+
+class UserTokenRefreshView(TokenRefreshView):
+  """Custom user token refresh view."""
+  serializer_class = UserTokenRefreshSerializer
 
 class UserViewSet(mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,

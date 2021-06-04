@@ -9,6 +9,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.state import token_backend
 
 # Models
 from cifo.users.models import User
@@ -20,6 +21,9 @@ from cifo.taskapp.tasks import send_confirmation_email
 import jwt
 import requests
 from datetime import timedelta
+
+# Serializers
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
 BASE_URL = "https://govcarpetaapp.mybluemix.net/apis"
 
@@ -142,3 +146,13 @@ class AccountVerificationSerializer(serializers.Serializer):
 
       user.is_verified = True
     user.save()
+
+class UserTokenRefreshSerializer(TokenRefreshSerializer):
+  """User token refresh serializer."""
+
+  def validate(self, attrs):
+    data = super(UserTokenRefreshSerializer, self).validate(attrs)
+    decoded_payload = token_backend.decode(data['access'], verify=True)
+    user_id = decoded_payload['user_id']
+    data['user'] = UserModelSerializer(User.objects.get(id=user_id)).data
+    return data
